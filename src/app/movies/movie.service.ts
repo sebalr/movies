@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, map, of } from 'rxjs';
-import { MovieBasic, MovieDetail } from 'src/app/movies/types/movie.interface';
+import { BOOKMARKED_MOVIES } from 'src/app/movies/constants/movie.constants';
+import { MovieBasic, MovieBasicBookmarked, MovieDetail } from 'src/app/movies/types/movie.interface';
 import { SortInformation } from 'src/app/movies/types/sort-information.interface';
 import { movies } from 'src/assets/db/movies';
 
@@ -15,6 +16,24 @@ export class MovieService {
 
   public getMovie(title: string): Observable<MovieDetail | undefined> {
     return of(movies).pipe(map(movies => movies.find(movie => movie.title === title)));
+  }
+
+  public getBookmarkedMovies(): Observable<string[]> {
+    return of(JSON.parse(localStorage.getItem(BOOKMARKED_MOVIES) ?? '[]'));
+  }
+
+  public bookmark(movie: MovieBasic): void {
+    const bookmarkedMovies: string[] = JSON.parse(localStorage.getItem(BOOKMARKED_MOVIES) ?? '[]');
+    bookmarkedMovies.push(movie.title);
+
+    localStorage.setItem(BOOKMARKED_MOVIES, JSON.stringify(bookmarkedMovies));
+  }
+
+  public removeBookmark(movie: MovieBasic): void {
+    const bookmarkedMovies: string[] = JSON.parse(localStorage.getItem(BOOKMARKED_MOVIES) ?? '[]');
+    bookmarkedMovies.splice(bookmarkedMovies.indexOf(movie.title), 1);
+
+    localStorage.setItem(BOOKMARKED_MOVIES, JSON.stringify(bookmarkedMovies));
   }
 
   private sortMovies(movies: MovieBasic[], information: SortInformation): MovieBasic[] {

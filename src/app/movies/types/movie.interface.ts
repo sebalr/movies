@@ -12,3 +12,10 @@ export interface MovieBasic {
 export interface MovieDetail extends MovieBasic {
   trailerLink: string;
 }
+
+export interface Bookmarked {
+  bookmarked: boolean;
+}
+
+export interface MovieBasicBookmarked extends MovieBasic, Bookmarked { }
+export interface MovieDetailBookmarked extends MovieDetail, Bookmarked { }

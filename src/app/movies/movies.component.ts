@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BehaviorSubject, Observable, switchMap } from 'rxjs';
-import { MovieBasic } from 'src/app/movies/types/movie.interface';
+import { BehaviorSubject, Observable, combineLatest, map, startWith, switchMap } from 'rxjs';
+import { MovieBasic, MovieBasicBookmarked } from 'src/app/movies/types/movie.interface';
 import { SortInformation } from 'src/app/movies/types/sort-information.interface';
 import { MovieService } from 'src/app/movies/movie.service';
 import { SortBy } from 'src/app/movies/types/sort-by.td';
@@ -14,14 +14,17 @@ import { SortBy } from 'src/app/movies/types/sort-by.td';
   styleUrls: ['./movies.component.scss']
 })
 export class MoviesComponent implements OnInit {
-  public movies$: Observable<MovieBasic[]> | undefined;
+  public movies$: Observable<MovieBasicBookmarked[]> | undefined;
 
   private sort$ = new BehaviorSubject<SortInformation | null>(null);
 
   constructor(private moviesService: MovieService) { }
 
   public ngOnInit(): void {
-    this.movies$ = this.sort$.pipe(switchMap(sortInformation => this.moviesService.getMovies(sortInformation)));
+    const sorted$ = this.sort$.pipe(switchMap(sortInformation => this.moviesService.getMovies(sortInformation)));
+    const bookmarked$ = this.moviesService.getBookmarkedMovies().pipe(startWith([] as string[]));
+    this.movies$ = combineLatest([bookmarked$, sorted$])
+      .pipe(map(([bookmarked, sorted]) => sorted.map(movie => ({ ...movie, bookmarked: bookmarked.includes(movie.title) }))));
   }
 
   public sort(sortBy: SortBy): void {
@@ -29,5 +32,13 @@ export class MoviesComponent implements OnInit {
 
     const sortOrder = current?.sortBy === sortBy && current?.sortOrder === 'asc' ? 'desc' : 'asc';
     this.sort$.next({ sortBy, sortOrder });
+  }
+
+  public bookmark(movie: MovieBasicBookmarked): void {
+    this.moviesService.bookmark(movie);
+  }
+
+  public removeBookmark(movie: MovieBasicBookmarked): void {
+    this.moviesService.removeBookmark(movie);
   }
 }
