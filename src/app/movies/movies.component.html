@@ -1,9 +1,10 @@
-<p>movies works!</p>
-<ul>
-  <li *ngFor="let movie of movies$ | async">
-    {{ movie | json }}
-  </li>
-</ul>
-
 <button (click)="sort('title')">Sort by name</button>
 <button (click)="sort('releasedDate')">Sort by date</button>
+<div class="movie-list">
+  <app-movie-thumbnail
+    *ngFor="let movie of movies$ | async"
+    [movie]="movie"
+    (onBookmarkRemoved)="removeBookmark(movie)"
+    (onBookmarked)="bookmark(movie)"
+  ></app-movie-thumbnail>
+</div>

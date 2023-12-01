@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BehaviorSubject, Observable, combineLatest, map, startWith, switchMap } from 'rxjs';
-import { MovieBasic, MovieBasicBookmarked } from 'src/app/movies/types/movie.interface';
+import { MovieBasicBookmarked } from 'src/app/movies/types/movie.interface';
 import { SortInformation } from 'src/app/movies/types/sort-information.interface';
 import { MovieService } from 'src/app/movies/movie.service';
 import { SortBy } from 'src/app/movies/types/sort-by.td';
+import { MovieThumbnailComponent } from 'src/app/movies/movie-thumbnail/movie-thumbnail.component';
 
 @Component({
   selector: 'app-movies',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MovieThumbnailComponent],
   templateUrl: './movies.component.html',
   styleUrls: ['./movies.component.scss']
 })
