@@ -1,0 +1,11 @@
+@use "@angular/material" as mat;
+mat-icon {
+  font-size: 1rem;
+  width: 1rem;
+  height: 1rem;
+}
+
+:host {
+  display: flex;
+  align-items: center;
+}

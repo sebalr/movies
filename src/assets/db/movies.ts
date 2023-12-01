@@ -10,6 +10,7 @@ export const movies: MovieDetail[] = [
     genre: ['Action', 'Sci-Fi'],
     releasedDate: '3 September 2020',
     trailerLink: 'https://www.youtube.com/watch?v=LdOM0x0XDMo',
+    thumbnailLink: "/assets/movies/tenet.png"
   },
   {
     title: 'Spider-Man: Into the Spider-Verse',
@@ -20,6 +21,7 @@ export const movies: MovieDetail[] = [
     genre: ['Action', 'Animation', 'Adventure'],
     releasedDate: '14 December 2018',
     trailerLink: 'https://www.youtube.com/watch?v=tg52up16eq0',
+    thumbnailLink: "/assets/movies/spiderman.png"
   },
   {
     title: 'Knives Out',
@@ -30,6 +32,7 @@ export const movies: MovieDetail[] = [
     genre: ['Comedy', 'Crime', 'Drama'],
     releasedDate: '27 November 2019',
     trailerLink: 'https://www.youtube.com/watch?v=qGqiHJTsRkQ',
+    thumbnailLink: "/assets/movies/knivesout.png"
   },
   {
     title: 'Guardians of the Galaxy',
@@ -40,6 +43,7 @@ export const movies: MovieDetail[] = [
     genre: ['Action', 'Adventure', 'Comedy'],
     releasedDate: '1 August 2014',
     trailerLink: 'https://www.youtube.com/watch?v=d96cjJhvlMA',
+    thumbnailLink: "/assets/movies/guardians.png"
   },
   {
     title: 'Avengers: Age of Ultron',
@@ -50,5 +54,6 @@ export const movies: MovieDetail[] = [
     genre: ['Action', 'Adventure', 'Sci-Fi'],
     releasedDate: '1 May 2015',
     trailerLink: 'https://www.youtube.com/watch?v=tmeOjFno6Do',
+    thumbnailLink: "/assets/movies/avengers.png"
   },
 ];

@@ -7,6 +7,7 @@ export interface MovieBasic {
   duration: string;
   genre: Genre[];
   releasedDate: string;
+  thumbnailLink: string;
 }
 
 export interface MovieDetail extends MovieBasic {

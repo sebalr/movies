@@ -1,21 +1,51 @@
 <mat-card>
-  <mat-card-header>
+  <mat-card-header class="stretch-title">
     <mat-card-title class="card-title">
-      {{ movie.title }}
-      <button type="button" (click)="bookmarkAction()">
-        <span *ngIf="movie.bookmarked">Y</span>
-        <span *ngIf="!movie.bookmarked">N</span>
+      <span class="card-title-text">
+        {{ movie.title }}
+      </span>
+      <button
+        *ngIf="!movie.bookmarked"
+        mat-icon-button
+        color="primary"
+        type="button"
+        (click)="bookmarkAction()"
+        (mouseenter)="setNotBookmarkedIcon('bookmark_add')"
+        (mouseleave)="setNotBookmarkedIcon('bookmark')"
+      >
+        <mat-icon>
+          {{ notBookmakedIcon }}
+        </mat-icon>
+      </button>
+      <button
+        *ngIf="movie.bookmarked"
+        mat-icon-button
+        color="primary"
+        type="button"
+        (click)="bookmarkAction()"
+        (mouseenter)="setBookmarkedIcon('bookmark_remove')"
+        (mouseleave)="setBookmarkedIcon('bookmark_added')"
+      >
+        <mat-icon>
+          {{ bookmakedIcon }}
+        </mat-icon>
       </button>
     </mat-card-title>
-    <mat-card-subtitle>{{ movie.releasedDate }}</mat-card-subtitle>
+    <mat-card-subtitle class="card-subtitle">
+      <app-rating-start [rating]="movie.rating"></app-rating-start>
+      {{ movie.releasedDate }}
+    </mat-card-subtitle>
   </mat-card-header>
   <img
     mat-card-image
-    src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+    [ngSrc]="movie.thumbnailLink"
+    width="300"
+    height="400"
+    priority
     alt="Photo of a Shiba Inu"
   />
   <mat-card-content>
-    <p>
+    <p class="movie-description">
       {{ movie.description }}
     </p>
   </mat-card-content>

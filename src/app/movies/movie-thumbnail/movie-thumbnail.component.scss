@@ -1,6 +1,27 @@
+.card-subtitle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
 .card-title {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: nowrap;
+  align-items: center;
+}
+
+.card-title-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 210px;
+}
+
+.movie-description {
+  height: 120px;
+  overflow: hidden;
 }
