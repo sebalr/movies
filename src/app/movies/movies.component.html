@@ -1,5 +1,4 @@
-<button (click)="sort('title')">Sort by name</button>
-<button (click)="sort('releasedDate')">Sort by date</button>
+<app-sorting (sortChange)="sort($event)"></app-sorting>
 <div class="movie-list">
   <app-movie-thumbnail
     *ngFor="let movie of movies$ | async"

@@ -6,11 +6,12 @@ import { SortInformation } from 'src/app/movies/types/sort-information.interface
 import { MovieService } from 'src/app/movies/movie.service';
 import { SortBy } from 'src/app/movies/types/sort-by.td';
 import { MovieThumbnailComponent } from 'src/app/movies/movie-thumbnail/movie-thumbnail.component';
+import { SortingComponent } from 'src/app/movies/sorting/sorting.component';
 
 @Component({
   selector: 'app-movies',
   standalone: true,
-  imports: [CommonModule, MovieThumbnailComponent],
+  imports: [CommonModule, MovieThumbnailComponent, SortingComponent],
   templateUrl: './movies.component.html',
   styleUrls: ['./movies.component.scss']
 })
