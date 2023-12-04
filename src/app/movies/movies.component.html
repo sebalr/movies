@@ -1,9 +1,12 @@
-<app-sorting (sortChange)="sort($event)"></app-sorting>
-<div class="movie-list">
+<div class="header">
+  <app-filters [filterControl]="filterForm"></app-filters>
+  <app-sorting (sortChange)="sort($event)"></app-sorting>
+</div>
+<section class="movie-list">
   <app-movie-thumbnail
     *ngFor="let movie of movies$ | async"
     [movie]="movie"
     (onBookmarkRemoved)="removeBookmark(movie)"
     (onBookmarked)="bookmark(movie)"
   ></app-movie-thumbnail>
-</div>
+</section>
