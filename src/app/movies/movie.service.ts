@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable, map, of } from 'rxjs';
+import { Observable, map, of, zip } from 'rxjs';
 import { BOOKMARKED_MOVIES } from 'src/app/movies/constants/movie.constants';
-import { MovieBasic, MovieBasicBookmarked, MovieDetail } from 'src/app/movies/types/movie.interface';
+import { MovieBasic, MovieBasicBookmarked, MovieDetail, MovieDetailBookmarked } from 'src/app/movies/types/movie.interface';
 import { SortInformation } from 'src/app/movies/types/sort-information.interface';
 import { movies } from 'src/assets/db/movies';
 
@@ -14,8 +14,13 @@ export class MovieService {
     return of(movies).pipe(map((movies: MovieBasic[]) => sort === null ? movies : this.sortMovies(movies, sort)));
   }
 
-  public getMovie(title: string): Observable<MovieDetail | undefined> {
-    return of(movies).pipe(map(movies => movies.find(movie => movie.title === title)));
+  public getMovie(title: string): Observable<MovieDetailBookmarked | undefined> {
+    return zip(this.getBookmarkedMovies(), of(movies)).pipe(
+      map(([bookmarked, movies]) => {
+        const movie = movies.find(movie => movie.title === title);
+        return movie ? { ...movie, bookmarked: bookmarked.includes(movie.title) } : undefined;
+      }
+      ));
   }
 
   public getBookmarkedMovies(): Observable<string[]> {

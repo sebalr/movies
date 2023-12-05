@@ -1,1 +1,7 @@
-<p>movie-detail works!</p>
+<mat-card *ngIf="movie$ | async as movie; else missingMovie">
+  <mat-card-header>
+    {{ movie.title }}
+  </mat-card-header>
+  <mat-card-content> </mat-card-content>
+</mat-card>
+<ng-template #missingMovie> No movie founded with selected id </ng-template>
