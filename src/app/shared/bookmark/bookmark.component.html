@@ -1,0 +1,26 @@
+<button
+  *ngIf="!movie.bookmarked"
+  mat-icon-button
+  color="primary"
+  type="button"
+  (click)="bookmarkAction($event)"
+  (mouseenter)="setNotBookmarkedIcon('bookmark_add')"
+  (mouseleave)="setNotBookmarkedIcon('bookmark')"
+>
+  <mat-icon>
+    {{ notBookmakedIcon }}
+  </mat-icon>
+</button>
+<button
+  *ngIf="movie.bookmarked"
+  mat-icon-button
+  color="primary"
+  type="button"
+  (click)="bookmarkAction($event)"
+  (mouseenter)="setBookmarkedIcon('bookmark_remove')"
+  (mouseleave)="setBookmarkedIcon('bookmark_added')"
+>
+  <mat-icon>
+    {{ bookmakedIcon }}
+  </mat-icon>
+</button>

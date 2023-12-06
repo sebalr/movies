@@ -1,7 +1,28 @@
-<mat-card *ngIf="movie$ | async as movie; else missingMovie">
+<mat-card
+  [style.background]="'url(' + movie.thumbnailLink + ')'"
+  *ngIf="movie; else missingMovie"
+>
   <mat-card-header>
-    {{ movie.title }}
+    <mat-card-title class="card-title">
+      <span>
+        {{ movie.title }}
+      </span>
+      <app-bookmark
+        [movie]="movie"
+        (bookmarked)="bookmarkAction()"
+      ></app-bookmark>
+    </mat-card-title>
   </mat-card-header>
-  <mat-card-content> </mat-card-content>
+  <mat-card-content>
+    <youtube-player
+      *ngIf="videoId"
+      [height]="250"
+      [width]="500"
+      videoId="videoId"
+    />
+    <p>
+      {{ movie.description }}
+    </p>
+  </mat-card-content>
 </mat-card>
 <ng-template #missingMovie> No movie founded with selected id </ng-template>

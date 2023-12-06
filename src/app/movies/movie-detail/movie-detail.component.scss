@@ -1,0 +1,30 @@
+:host {
+  display: flex;
+  justify-content: center;
+}
+
+mat-card {
+  width: 600px;
+  background-size: cover !important;
+}
+
+mat-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.card-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+p {
+  backdrop-filter: blur(10px) saturate(70%);
+  margin-left: -1rem;
+  margin-right: -1rem;
+}

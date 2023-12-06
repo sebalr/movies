@@ -6,11 +6,21 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { NgOptimizedImage } from '@angular/common'
 import { RatingStartComponent } from 'src/app/shared/rating-start/rating-start.component';
+import { BookmarkComponent } from 'src/app/shared/bookmark/bookmark.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-movie-thumbnail',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatCardModule, MatIconModule, NgOptimizedImage, RatingStartComponent],
+  imports: [
+    CommonModule,
+    BookmarkComponent,
+    MatButtonModule,
+    MatCardModule,
+    MatIconModule,
+    NgOptimizedImage,
+    RatingStartComponent
+  ],
   templateUrl: './movie-thumbnail.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./movie-thumbnail.component.scss']
@@ -20,15 +30,10 @@ export class MovieThumbnailComponent {
   @Output() onBookmarked = new EventEmitter<void>();
   @Output() onBookmarkRemoved = new EventEmitter<void>();
 
-  public notBookmakedIcon = 'bookmark';
-  public bookmakedIcon = 'bookmark_added';
+  constructor(private router: Router) { }
 
-  public setBookmarkedIcon(icon: string) {
-    this.bookmakedIcon = icon;
-  }
-
-  public setNotBookmarkedIcon(icon: string) {
-    this.notBookmakedIcon = icon;
+  public openDetail(): void {
+    this.router.navigate(['/', this.movie.title]);
   }
 
   public bookmarkAction(): void {
